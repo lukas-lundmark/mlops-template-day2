@@ -1,3 +1,8 @@
+* Note
+This is an updated version of the template directory which completes the first two parts of the first day of the workshop. It contains an updated version of the notebook with remote tracking, as well as code for building a remote web service running on AML compute.
+
+Use this template if you feel that you will not have time to complete the preparations.
+
 * MLOps Template
 This is a template directory for people starting with the MLOps Workshop or the MLOps Master Class. Clone the template and follow the instructions below for how to setup your local environment. Then, read the instructions [[https://github.com/lukas-lundmark/mlops-masterclass/blob/main/day-1.org][here]] for how to continue.
 
@@ -43,13 +48,10 @@ Start a notebook using command
 #+begin_src bash
 jupyter notebook
 #+end_src
-and open the notebook in your browser or editor of choice.
-
+and open the notebook ~Exploratory Data Analysis with Tracking.ipynb~ in your browser or editor of choice. This notebook already contains the necessary code for starting an interactive experiment and registering datasets. Inspect the code and make sure you can run it from start to finish.
 
 * Webservices
-This repo contains a few utilities to help you get started with deploying your models.
-
-There exists a dummy scoring script in ~src/deploy/score.py~ and a very basic packaging script in ~ml_pipelines/deploy/package_service.py~. You can use them already, but they don't package any model (yet) so they aren't really useful.
+Use the  packaging script in ~ml_pipelines/deploy/package_service.py~ to build a local webservice.
 
 Run the script and follow the instructions for how to build your docker image
 #+begin_src bash
@@ -62,6 +64,12 @@ python send_request.py --url http://localhost:6789/score --source-file data/diam
 #+end_src
 which will send 10 records to your local service from the file data/diamonds-test.csv. Use this to test you different services.
 
-There also exists a utility module in ~ml_pipelines/utils.py~ that defines some useful classes and functions for managing AML.
+Run the webservice build script to build a remote webservice running on AML Compute
+#+begin_src bash
+python -m ml_pipelines.deploy.build_webservice
+#+end_src
+or you can run it locally for debugging purposes
 
-Use these tools to build a proper machine learning service.
+#+begin_src bash
+python -m ml_pipelines.deploy.build_webservice --local
+#+end_src
