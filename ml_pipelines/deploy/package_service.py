@@ -15,7 +15,7 @@ inference_config = InferenceConfig(
 
 model = Model(workspace, name=env_vars.model_name)
 package = Model.package(
-    workspace, models=[], inference_config=inference_config, generate_dockerfile=True
+    workspace, models=[model], inference_config=inference_config, generate_dockerfile=True
 )
 package.wait_for_creation(show_output=True)
 
