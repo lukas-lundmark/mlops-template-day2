@@ -13,7 +13,7 @@ inference_config = InferenceConfig(
     environment=environment,
 )
 
-# No model here yet!!!
+model = Model(workspace, name=env_vars.model_name)
 package = Model.package(
     workspace, models=[], inference_config=inference_config, generate_dockerfile=True
 )
